@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 function error {
     echo -e $* >&2
@@ -11,7 +11,7 @@ if [ $? != 0 ] ; then error "Failed parsing options." ; exit 1 ; fi
 
 eval set -- "$OPTS"
 
-DIST=xenial
+DIST=bionic
 PASSWD=rooter
 JWT=
 HELP=0
@@ -43,7 +43,7 @@ if [ "$UID" != "0" ]
     exit 1
 fi
 
-ROOT=$DIST
+ROOT=/opt/$DIST
 
 debootstrap $DIST $ROOT http://ftp.belnet.be/ubuntu.com/ubuntu
 
@@ -81,6 +81,12 @@ en_GB.UTF-8 UTF-8
 EOF
 
 # interface name is always ens4
+mkdir $ROOT/etc/network/interfaces.d
+
+cat > $ROOT/etc/network/interfaces <<EOF
+source /etc/network/interfaces.d/*
+EOF
+
 cat > $ROOT/etc/network/interfaces.d/ens4 <<EOF
 auto ens4
 iface ens4 inet dhcp
@@ -96,21 +102,25 @@ update-initramfs -u
 
 KERNEL=\`ls /boot/vmlinuz-*\`
 INITRD=\`ls /boot/initrd.img-*\`
+
 cat > /boot/boot.yaml <<INEOF
 kernel: \${KERNEL}
 initrd: \${INITRD}
 INEOF
 
 echo "root:${PASSWD}" | chpasswd
+
 EOF
 
 chroot $ROOT /bin/bash /setup.sh
 
+
 #EXTRA CONFIG
 cat > $ROOT/setup.sh <<EOF
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:/bin:/usr/bin:/usr/local/bin
+apt update
+apt-get install -y openssh-server 
 
-apt-get install -y openssh-server
 EOF
 
 chroot $ROOT /bin/bash /setup.sh
@@ -130,7 +140,7 @@ popd
 if [ "${JWT}" != "" ]
 then
     echo "Uploading image to hub..."
-    curl -b "caddyoauth=${JWT}" -F file=@${FNAME} https://hub.gig.tech/api/flist/me/upload
+    curl -b "caddyoauth=${JWT}" -F file=@${FNAME} https://hub.grid.tf/api/flist/me/upload
 else
     echo "No JWT token is given, skipping upload"
 fi
