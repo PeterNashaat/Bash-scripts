@@ -1,0 +1,224 @@
+https://support.grid.tf {
+	proxy / 10.102.26.154:8002 {
+		transparent
+	}
+}
+
+http://support.grid.tf {  
+    redir https://support.grid.tf{uri}
+}
+
+
+https://freeflowpages.com {
+	proxy / 10.102.26.154:8980 {
+		transparent
+	}
+}
+
+http://freeflowpages.com {  
+    redir https://freeflowpages.com{uri}
+}
+
+
+https://www.freeflowpages.com {
+	proxy / 10.102.26.154:8980 {
+		transparent
+	}
+}
+
+http://www.freeflowpages.com {  
+    redir https://www.freeflowpages.com{uri}
+}
+
+https://freeflownation.org {
+        proxy / 10.102.223.147:9092 {
+                transparent
+        }
+}
+
+http://freeflownation.org {
+    redir https://freeflownation{uri}
+}
+
+http://backup.threefold.me {
+        proxy / ftp://188.165.218.205:8221 {
+                transparent
+        }
+}
+
+https://staging.circles.threefold.me {
+        proxy / 10.102.223.147:8023 {
+                transparent
+        }
+        proxy /events 10.102.223.147:8023/events {
+                websocket
+        }
+
+}
+
+
+http://staging.circles.threefold.me {
+        redir https://staging.circles.threefold.me{uri}
+}
+
+
+http://www.staging.circles.threefold.me {
+        redir https://staging.circles.threefold.me{uri}
+}
+
+https://staging.projects.threefold.me {
+        redir https://staging.circles.threefold.me{uri} 
+}
+
+
+http://staging.projects.threefold.me {
+        redir https://staging.circles.threefold.me{uri}
+}
+
+
+
+
+https://circles.threefold.me {
+        proxy / 10.102.26.154:8022 {
+                transparent
+        }
+	proxy /events 10.102.26.154:8022/events {
+                websocket
+        }
+
+}
+
+http://circles.threefold.me {
+    redir https://circles.threefold.me{uri}
+}
+
+http://www.projects.threefold.me {
+    redir https://www.circles.threefold.me{uri}
+}
+
+http://projects.threefold.me {
+    redir https://circles.threefold.me{uri}
+}
+
+https://projects.threefold.me {
+    redir https://circles.threefold.me{uri}
+}
+
+https://staging.freeflowpages.com https://www.staging.freeflowpages.com {
+        proxy / 10.102.251.225:8003 {
+                transparent
+        }
+
+}
+
+http://staging.freeflowpages.com http://www.staging.freeflowpages.com {
+    redir https://staging.freeflowpages.com{uri}
+}
+
+https://wiki2.threefold.io {
+        proxy / 10.102.223.147:9090 {
+                transparent
+        }
+}
+
+http://wiki2.threefold.io {
+    redir https://wiki2.threefold.io{uri}
+}
+
+
+
+http://www.codescalers.com {
+    redir https://www.codescalers.com{uri}
+}
+
+https://www.codescalers.com {
+        proxy / http://10.102.223.147:5067/ {
+                transparent
+        }
+}
+
+http://www2.codescalers.com {
+    redir https://www2.codescalers.com{uri}
+}
+
+https://www2.codescalers.com {
+        proxy / http://10.102.223.147:5069/ {
+                transparent
+        }
+}
+
+
+https://forums.threefold.io http://forums.threefold.io {
+    redir https://forum.threefold.io{uri}
+
+}
+
+
+https://forum.threefold.io {
+        proxy / 10.102.251.225:805 {
+                transparent
+        }
+}
+
+http://forum.threefold.io {
+        redir https://forum.threefold.io{uri}
+}
+
+
+https://staging.forum.threefold.io {
+	proxy / 10.102.251.225:803 {
+		transparent
+	}
+}
+
+http://staging.forum.threefold.io {
+	redir https://staging.forum.threefold.io{uri}
+}
+
+
+https://test.freeflowpages.com {
+        proxy / 10.102.251.225:8002 {
+                transparent
+        }
+
+}
+
+http://test.freeflowpages.com {
+    redir https://test.freeflowpages.com{uri}
+}
+
+https://test.circles.threefold.me {
+        proxy / 10.102.223.147:804 {
+                transparent
+        }
+        proxy /events 10.102.223.147:804/events {
+                websocket
+        }
+
+}
+
+
+http://test.circles.threefold.me {
+        redir https://test.circles.threefold.me{uri}
+}
+
+
+http://artheon.freeflownation.org {
+    redir https://artheon.freeflownation.org{uri}
+}
+
+https://artheon.freeflownation.org {
+        proxy / http://10.102.26.154:5951/ {
+                transparent
+	     }
+}
+
+http://artheon.co http://www.artheon.co {
+    redir https://artheon.co{uri}
+}
+
+https://artheon.co https://www.artheon.co {
+        proxy / http://10.102.26.154:5105/ {
+                transparent
+             }
+}
